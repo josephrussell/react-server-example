@@ -1,5 +1,4 @@
-var React = require('react'),
-    DOM = React.DOM, div = DOM.div, button = DOM.button, ul = DOM.ul, li = DOM.li
+var React = require('react')
 
 // This is just a simple example of a component that can be rendered on both
 // the server and browser
@@ -32,15 +31,11 @@ module.exports = React.createClass({
   // Note that we allow the button to be disabled initially, and then enable it
   // when everything has loaded
   render: function() {
-
-    return div(null,
-
-      button({onClick: this.handleClick, disabled: this.state.disabled}, 'Add Item'),
-
-      ul({children: this.state.items.map(function(item) {
-        return li(null, item)
+    return React.createElement("div", {'data-initial-props': this.props.initialProps},
+      React.createElement("button", {onClick: this.handleClick, disabled: this.state.disabled}, 'Add Item'),
+      React.createElement("ul", {children: this.state.items.map(function(item) {
+        return React.createElement("li", null, item)
       })})
-
     )
-  },
+  }
 })

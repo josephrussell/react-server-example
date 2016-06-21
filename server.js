@@ -30,10 +30,10 @@ http.createServer(function(req, res) {
       items: [
         'Item 0',
         'Item 1',
-        'Item </script>',
-        'Item <!--inject!-->',
+        'Item 2'
       ]
     }
+    props.initialProps = safeStringify(props);
 
     // Here we're using React to render the outer body, so we just use the
     // simpler renderToStaticMarkup function, but you could use any templating
@@ -47,12 +47,17 @@ http.createServer(function(req, res) {
         ReactDOMServer.renderToString(App(props))
       }}),
 
+      /*
+
+      NOTE: Testing to see if I could initialize props from a data-* attribute instead of the below
+
       // The props should match on the client and server, so we stringify them
       // on the page to be available for access by the code run in browser.js
       // You could use any var name here as long as it's unique
       script({dangerouslySetInnerHTML: {__html:
         'var APP_PROPS = ' + safeStringify(props) + ';'
       }}),
+      */
 
       // We'll load React from a CDN - you don't have to do this,
       // you can bundle it up or serve it locally if you like
